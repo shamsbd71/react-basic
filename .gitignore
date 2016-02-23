@@ -1,3 +1,11 @@
+.DS_Store
+
+# PHPStorm
+.idea/
+
+# output
+dist
+
 # Logs
 logs
 *.log
