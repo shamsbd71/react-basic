@@ -17,7 +17,7 @@ class Status extends Component {
               <p>
                 <strong>{this.props.name}</strong>
                 <article>{this.props.content}</article>
-                <Toolbar />
+                <Toolbar likes={this.props.likes} addLike={this.props.addLike} statusIndex={this.props.statusIndex}/>
               </p>
             </div>
           </div>
