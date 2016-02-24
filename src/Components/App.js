@@ -44,10 +44,10 @@ class App extends Component {
   }
 
   renderStatus(status, index) {
-    let {content, name, profilePicture, comments} = status;
+    let {content, name, profilePicture, comments, likes} = status;
     return (
       <div className='status-wrapper notification'>
-        <Status content={content} name={name} profilePicture={profilePicture}/>
+        <Status content={content} name={name} profilePicture={profilePicture} likes={likes} addLike={this.addLike.bind(this)} statusIndex={index}/>
         <Comment comments={comments} statusIndex={index} addComment={this.addComment.bind(this)}/>
       </div>
     )
@@ -64,6 +64,19 @@ class App extends Component {
     statuses[statusIndex].comments.push(comment);
 
     this.setState({statuses});
+  }
+  addLike(content, statusIndex){
+    console.log(content);
+    //let comment = {
+    //  content,
+    //  name: this.state.user.username,
+    //  profilePicture: this.state.user.profilePicture,
+    //};
+    //
+    //let statuses = this.state.statuses.slice();
+    //statuses[statusIndex].comments.push(comment);
+    //
+    //this.setState({statuses});
   }
 
   postStatus() {
@@ -120,3 +133,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+// (Math.random()*10%5) * 500
