@@ -11,6 +11,7 @@ let statuses = [
     name: 'Parvez Akhter',
     profilePicture: 'http://placehold.it/100x100/fce473/fff/?text=Parvez',
     likes: 0,
+    liked: 0,
     comments: [
       {
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, at!',
@@ -44,10 +45,10 @@ class App extends Component {
   }
 
   renderStatus(status, index) {
-    let {content, name, profilePicture, comments, likes} = status;
+    let {content, name, profilePicture, comments, likes, liked} = status;
     return (
       <div className='status-wrapper notification'>
-        <Status content={content} name={name} profilePicture={profilePicture} likes={likes} addLike={this.addLike.bind(this)} statusIndex={index}/>
+        <Status content={content} name={name} profilePicture={profilePicture} liked={liked} likes={likes} toggleLike={this.toggleLike.bind(this)} statusIndex={index}/>
         <Comment comments={comments} statusIndex={index} addComment={this.addComment.bind(this)}/>
       </div>
     )
@@ -65,18 +66,18 @@ class App extends Component {
 
     this.setState({statuses});
   }
-  addLike(content, statusIndex){
-    console.log(content);
-    //let comment = {
-    //  content,
-    //  name: this.state.user.username,
-    //  profilePicture: this.state.user.profilePicture,
-    //};
-    //
-    //let statuses = this.state.statuses.slice();
-    //statuses[statusIndex].comments.push(comment);
-    //
-    //this.setState({statuses});
+  toggleLike(statusIndex){
+    let statuses = this.state.statuses.slice();
+    if(!statuses[statusIndex].liked)
+    {
+      statuses[statusIndex].liked = 1;
+      statuses[statusIndex].likes++;
+      this.setState({statuses});
+    }else{
+      statuses[statusIndex].liked = 0;
+      statuses[statusIndex].likes--;
+      this.setState({statuses});
+    }
   }
 
   postStatus() {
@@ -84,7 +85,9 @@ class App extends Component {
       content: this.refs.textarea.value,
       name: this.state.user.username,
       profilePicture: this.state.user.profilePicture,
-      comments: []
+      comments: [],
+      likes: 0,
+      liked: 0
     };
 
     //console.log(this.state.statuses.slice().concat([comment]) );
