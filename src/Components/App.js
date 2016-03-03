@@ -104,8 +104,8 @@ class App extends Component {
   }
 
   render() {
+    console.log('Re-rendering App...');
     let {statuses} = this.state;
-
     return (
       <div>
         <Header />
